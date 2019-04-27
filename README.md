@@ -7,13 +7,13 @@ An updated plugin for [Parcel][parcel url] to generate a service worker with [Wo
 You can either install by running yarn (recommended)
 
 ```bash
-yarn add parcel-plugin-workbox --dev
+yarn add parcel-plugin-workbox-rev --dev
 ```
 
 or use npm
 
 ```bash
-npm install parcel-plugin-workbox --save-dev
+npm install parcel-plugin-workbox-rev --save-dev
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ Note: If you have this plugin active during development, you will need to either
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/dahnielson/parcel-plugin-workbox/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://gitlab.com/selfagency/parcel-plugin-workbox-rev/tags).
 
 ## License
 
