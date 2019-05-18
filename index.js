@@ -15,19 +15,16 @@ module.exports = bundle => {
       // directory to include
       globDirectory: bundle.options.outDir,
       // file types to include
-      globPatterns: [
-        '**\/*.{css,html,js,gif,ico,jpg,png,svg,webp,woff,woff2,ttf,otf}'
-      ]
+      globPatterns: ['**/*.{css,html,js,gif,ico,jpg,png,svg,webp,woff,woff2,ttf,otf}']
     }
 
     let pkg,
       mainAsset =
-      bundle.mainAsset ||
-      bundle.mainBundle.entryAsset ||
-      bundle.mainBundle.childBundles.values().next().value.entryAsset
+        bundle.mainAsset ||
+        bundle.mainBundle.entryAsset ||
+        bundle.mainBundle.childBundles.values().next().value.entryAsset
 
-    pkg = typeof mainAsset.getPackage === 'function' ?
-      await mainAsset.getPackage() : mainAsset.package
+    pkg = typeof mainAsset.getPackage === 'function' ? await mainAsset.getPackage() : mainAsset.package
 
     let config = Object.assign({}, DEFAULT_CONFIG)
     if (pkg.workbox) {
@@ -63,24 +60,26 @@ module.exports = bundle => {
     })
     config.importScripts.push('https://storage.googleapis.com/workbox-cdn/releases/4.1.1/workbox-sw.js')
 
-    generateSWString(config).then(swString => {
-      swString = swString.swString
-      logger.success('Service worker generated')
-      if (bundle.options.minify) {
-        swString = uglifyJS.minify(swString).code
-        logger.success('Service worker minified')
-      }
-      writeFileSync(path.join(dest, 'sw.js'), swString)
-      logger.success(`Service worker written to ${dest}/sw.js`)
-    }).catch(err => {
-      logger.error(err)
-    })
+    generateSWString(config)
+      .then(swString => {
+        swString = swString.swString
+        logger.success('Service worker generated')
+        if (bundle.options.minify) {
+          swString = uglifyJS.minify(swString).code
+          logger.success('Service worker minified')
+        }
+        writeFileSync(path.join(dest, 'sw.js'), swString)
+        logger.success(`Service worker written to ${dest}/sw.js`)
+      })
+      .catch(err => {
+        logger.error(err)
+      })
 
     const entry = path.resolve(pathOut, 'index.html')
     readFile(entry, 'utf8', (err, data) => {
       if (err) logger.error(err)
       if (!data.includes('serviceWorker.register')) {
-        let swTag =`
+        let swTag = `
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function() {
             navigator.serviceWorker.register('/sw.js');

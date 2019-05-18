@@ -27,7 +27,7 @@ You can customize the settings by adding a `workbox` section to your `package.js
   importScripts: ['./worker.js'],           // scripts to import into `sw.js`
   globDirectory: './dist',                  // directory to cache (usually output dir)
   globPatterns: [                           // file types to include
-  '**/*.{css,html,gif,js,jpg,png,svg,webp}'
+  '**/*.{css,html,js,gif,ico,jpg,png,svg,webp,woff,woff2,ttf,otf}'
 }
 ```
 
