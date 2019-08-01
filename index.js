@@ -20,20 +20,28 @@ module.exports = bundle => {
 
     let pkg
     let mainAsset =
-        bundle.mainAsset ||
-        bundle.mainBundle.entryAsset ||
-        bundle.mainBundle.childBundles.values().next().value.entryAsset
+      bundle.mainAsset ||
+      bundle.mainBundle.entryAsset ||
+      bundle.mainBundle.childBundles.values().next().value.entryAsset
 
     pkg = typeof mainAsset.getPackage === 'function' ? await mainAsset.getPackage() : mainAsset.package
 
     let config = Object.assign({}, DEFAULT_CONFIG)
     if (pkg.workbox) {
-      if (pkg.workbox.importScripts && Array.isArray(pkg.workbox.importScripts)) { config.importScripts = pkg.workbox.importScripts }
-      if (pkg.workbox.importScripts && !Array.isArray(pkg.workbox.importScripts)) { config.importScripts = [pkg.workbox.importScripts] }
+      if (pkg.workbox.importScripts && Array.isArray(pkg.workbox.importScripts)) {
+        config.importScripts = pkg.workbox.importScripts
+      }
+      if (pkg.workbox.importScripts && !Array.isArray(pkg.workbox.importScripts)) {
+        config.importScripts = [pkg.workbox.importScripts]
+      }
       if (pkg.workbox.globDirectory) config.globDirectory = pkg.workbox.globDirectory
       config.globDirectory = path.resolve(config.globDirectory)
-      if (pkg.workbox.globPatterns && Array.isArray(pkg.workbox.globParrents)) { config.globPatterns = pkg.workbox.globPatterns }
-      if (pkg.workbox.globPatterns && !Array.isArray(pkg.workbox.globParrents)) { config.globPatterns = [pkg.workbox.globPatterns] }
+      if (pkg.workbox.globPatterns && Array.isArray(pkg.workbox.globPatterns)) {
+        config.globPatterns = pkg.workbox.globPatterns
+      }
+      if (pkg.workbox.globPatterns && !Array.isArray(pkg.workbox.globPatterns)) {
+        config.globPatterns = [pkg.workbox.globPatterns]
+      }
       if (pkg.workbox.pathOut) pathOut = pkg.workbox.pathOut
     }
     const dest = path.resolve(pathOut)

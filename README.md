@@ -22,12 +22,13 @@ When you build resources with Parcel, the plugin will generate a service worker 
 
 You can customize the settings by adding a `workbox` section to your `package.json`.
 
-```
+```json
 "workbox": {
-  importScripts: ['./worker.js'],           // scripts to import into `sw.js`
-  globDirectory: './dist',                  // directory to cache (usually output dir)
-  globPatterns: [                           // file types to include
-  '**/*.{css,html,js,gif,ico,jpg,png,svg,webp,woff,woff2,ttf,otf}'
+  "importScripts": ["./worker.js"],           // scripts to import into `sw.js`
+  "globDirectory": "./dist",                  // directory to cache (usually output dir)
+  "globPatterns": [                           // file types to include
+    "**/*.{css,html,js,gif,ico,jpg,png,svg,webp,woff,woff2,ttf,otf}"
+  ]
 }
 ```
 
