@@ -13,12 +13,15 @@
     "pwa"
   ],
   "scripts": {
-    "test": "eslint ."
+    "test": "eslint .",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "private": false,
   "dependencies": {
     "uglify-js": "^3.4.0",
-    "workbox-build": "^4.2.0"
+    "workbox-build": "^4.2.0",
+    "snyk": "^1.319.1"
   },
   "peerDependencies": {
     "parcel-bundler": "^1.8.1"
@@ -30,5 +33,6 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-standard": "^4.0.0"
-  }
+  },
+  "snyk": true
 }
